@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import { usersDB } from '../services/database.js';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await usersDB.findByEmail(email);
     if (existingUser) {
       return res.status(400).json({ 
         success: false, 
@@ -18,26 +19,32 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     // Create new user
-    const user = new User({ name, email, password });
-    await user.save();
+    const user = await usersDB.create({
+      name,
+      email: email.toLowerCase(),
+      password: hashedPassword
+    });
 
     // Generate token
     const token = jwt.sign(
-      { userId: user._id }, 
+      { userId: user.id }, 
       process.env.JWT_SECRET, 
       { expiresIn: '7d' }
     );
+
+    // Remove password from response
+    const { password: _, ...userWithoutPassword } = user;
 
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
+      user: userWithoutPassword
     });
   } catch (error) {
     res.status(500).json({ 
@@ -54,7 +61,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     // Find user
-    const user = await User.findOne({ email });
+    const user = await usersDB.findByEmail(email);
     if (!user) {
       return res.status(401).json({ 
         success: false, 
@@ -63,7 +70,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Check password
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ 
         success: false, 
@@ -73,20 +80,19 @@ router.post('/login', async (req, res) => {
 
     // Generate token
     const token = jwt.sign(
-      { userId: user._id }, 
+      { userId: user.id }, 
       process.env.JWT_SECRET, 
       { expiresIn: '7d' }
     );
+
+    // Remove password from response
+    const { password: _, ...userWithoutPassword } = user;
 
     res.json({
       success: true,
       message: 'Login successful',
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
+      user: userWithoutPassword
     });
   } catch (error) {
     res.status(500).json({ 

@@ -1,5 +1,5 @@
 import express from 'express';
-import UXLaw from '../models/UXLaw.js';
+import { lawsDB } from '../services/database.js';
 import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 // Get all UX laws (public)
 router.get('/', async (req, res) => {
   try {
-    const laws = await UXLaw.find().sort({ createdAt: -1 });
+    const laws = await lawsDB.getAll();
     res.json({
       success: true,
       data: laws
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 // Get single UX law by ID (public)
 router.get('/:id', async (req, res) => {
   try {
-    const law = await UXLaw.findOne({ id: req.params.id });
+    const law = await lawsDB.findById(req.params.id);
     
     if (!law) {
       return res.status(404).json({ 
@@ -46,18 +46,9 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Initialize UX laws (protected - for admin)
+// Initialize UX laws (protected - run once)
 router.post('/initialize', authMiddleware, async (req, res) => {
   try {
-    const existingLaws = await UXLaw.countDocuments();
-    
-    if (existingLaws > 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'UX laws already initialized' 
-      });
-    }
-
     const uxLaws = [
       {
         id: 'fitts-law',
@@ -238,7 +229,7 @@ router.post('/initialize', authMiddleware, async (req, res) => {
       }
     ];
 
-    await UXLaw.insertMany(uxLaws);
+    await lawsDB.initialize(uxLaws);
 
     res.status(201).json({
       success: true,
@@ -248,8 +239,7 @@ router.post('/initialize', authMiddleware, async (req, res) => {
   } catch (error) {
     res.status(500).json({ 
       success: false, 
-      message: 'Error initializing UX laws', 
-      error: error.message 
+      message: error.message || 'Error initializing UX laws'
     });
   }
 });

@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../models/User.js';
+import { usersDB } from '../services/database.js';
 import { authMiddleware } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 // Get user profile
 router.get('/profile', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await usersDB.findById(req.userId);
     
     if (!user) {
       return res.status(404).json({ 
@@ -16,9 +16,12 @@ router.get('/profile', authMiddleware, async (req, res) => {
       });
     }
 
+    // Remove password from response
+    const { password, ...userWithoutPassword } = user;
+
     res.json({
       success: true,
-      data: user
+      data: userWithoutPassword
     });
   } catch (error) {
     res.status(500).json({ 
@@ -35,7 +38,7 @@ router.put('/progress/:lawId', authMiddleware, async (req, res) => {
     const { lawId } = req.params;
     const { completed } = req.body;
 
-    const user = await User.findById(req.userId);
+    const user = await usersDB.updateProgress(req.userId, lawId, completed);
     
     if (!user) {
       return res.status(404).json({ 
@@ -44,23 +47,11 @@ router.put('/progress/:lawId', authMiddleware, async (req, res) => {
       });
     }
 
-    // Update progress
-    user.progress.set(lawId, completed);
-    
-    // Update completed laws
-    if (completed && !user.completedLaws.includes(lawId)) {
-      user.completedLaws.push(lawId);
-    } else if (!completed && user.completedLaws.includes(lawId)) {
-      user.completedLaws = user.completedLaws.filter(id => id !== lawId);
-    }
-
-    await user.save();
-
     res.json({
       success: true,
       message: 'Progress updated successfully',
       data: {
-        progress: Object.fromEntries(user.progress),
+        progress: user.progress,
         completedLaws: user.completedLaws
       }
     });
