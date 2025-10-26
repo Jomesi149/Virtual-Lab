@@ -1,6 +1,6 @@
 # NO MongoDB needed for JSON version!
 Write-Host "Starting JSON Backend (No database required)..." -ForegroundColor Green
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot\backend-json'; npm run dev"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PSScriptRoot\backend'; npm run dev"
 
 # Wait a bit for backend to start
 Start-Sleep -Seconds 3
