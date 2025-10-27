@@ -1,10 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import axios from 'axios'
+import axiosInstance from '../utils/axios'
 
 const AuthContext = createContext(null)
-
-// API Base URL - gunakan environment variable untuk production
-const API_BASE_URL = import.meta.env.VITE_API_URL || ''
 
 export const useAuth = () => {
   const context = useContext(AuthContext)
@@ -24,7 +21,6 @@ export const AuthProvider = ({ children }) => {
     
     if (token && userData) {
       setUser(JSON.parse(userData))
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
     
     setLoading(false)
@@ -32,12 +28,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password })
+      const response = await axiosInstance.post('/api/auth/login', { email, password })
       const { token, user } = response.data
       
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       
       setUser(user)
       return { success: true }
@@ -51,12 +46,11 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, { name, email, password })
+      const response = await axiosInstance.post('/api/auth/register', { name, email, password })
       const { token, user } = response.data
       
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       
       setUser(user)
       return { success: true }
@@ -71,7 +65,6 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    delete axios.defaults.headers.common['Authorization']
     setUser(null)
   }
 

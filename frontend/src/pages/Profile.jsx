@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import axiosInstance from '../utils/axios'
 import { useAuth } from '../context/AuthContext'
 import { User, Mail, Award, BookOpen } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
@@ -18,8 +18,8 @@ export default function Profile() {
   const fetchProfile = async () => {
     try {
       const [profileRes, lawsRes] = await Promise.all([
-        axios.get('/api/user/profile'),
-        axios.get('/api/ux-laws')
+        axiosInstance.get('/api/user/profile'),
+        axiosInstance.get('/api/ux-laws')
       ])
       
       setProfile(profileRes.data.data)

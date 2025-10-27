@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../utils/axios'
 import { ArrowLeft, CheckCircle, Circle, Lightbulb, List, Brain, Trophy } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { getIndonesianLaw } from '../data/uxLawsIndo'
@@ -24,8 +24,8 @@ export default function LawDetail() {
   const fetchLaw = async () => {
     try {
       const [lawRes, profileRes] = await Promise.all([
-        axios.get(`/api/ux-laws/${lawId}`),
-        axios.get('/api/user/profile')
+        axiosInstance.get(`/api/ux-laws/${lawId}`),
+        axiosInstance.get('/api/user/profile')
       ])
       
       // Apply Indonesian translation
@@ -47,7 +47,7 @@ export default function LawDetail() {
   const handleSimulationComplete = async () => {
     try {
       console.log('Marking law as complete:', lawId)
-      const response = await axios.put(`/api/user/progress/${lawId}`, {
+      const response = await axiosInstance.put(`/api/user/progress/${lawId}`, {
         completed: true
       })
       console.log('Progress update response:', response.data)

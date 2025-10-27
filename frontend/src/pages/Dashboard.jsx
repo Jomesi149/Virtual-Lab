@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../utils/axios'
 import { BookOpen, CheckCircle, Circle } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { getIndonesianLaw, categoryTranslations } from '../data/uxLawsIndo'
@@ -20,8 +20,8 @@ export default function Dashboard() {
     try {
       console.log('Fetching dashboard data...')
       const [lawsRes, profileRes] = await Promise.all([
-        axios.get('/api/ux-laws'),
-        axios.get('/api/user/profile')
+        axiosInstance.get('/api/ux-laws'),
+        axiosInstance.get('/api/user/profile')
       ])
       
       console.log('Profile data:', profileRes.data.data)
