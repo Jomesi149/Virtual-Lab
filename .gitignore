@@ -40,6 +40,3 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
-
-# MongoDB
-data/
