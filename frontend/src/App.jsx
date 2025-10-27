@@ -7,11 +7,12 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import LawDetail from './pages/LawDetail'
 import Profile from './pages/Profile'
+import Footer from './components/Footer'
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className="App">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,6 +43,7 @@ function App() {
             } 
           />
         </Routes>
+        <Footer />
       </div>
     </Router>
   )

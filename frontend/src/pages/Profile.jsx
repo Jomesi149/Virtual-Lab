@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
 import { User, Mail, Award, BookOpen } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Profile() {
   const { user } = useAuth()
+  const { isDark } = useTheme()
   const [profile, setProfile] = useState(null)
   const [laws, setLaws] = useState([])
   const [loading, setLoading] = useState(true)
@@ -31,8 +33,8 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
       </div>
     )
   }
@@ -42,18 +44,20 @@ export default function Profile() {
   const progressPercentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-background py-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
+        <h1 className="text-3xl font-bold text-accent mb-8" style={{ fontSize: '56px', fontWeight: 700 }}>My Profile</h1>
 
         {/* Profile Info Card */}
-        <div className="card p-8 mb-6">
+        <div className="bg-surface rounded-lg shadow-sm p-8 mb-8 transition-colors duration-300">
           <div className="flex items-center space-x-6 mb-6">
-            <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center">
-              <User className="h-10 w-10 text-primary-600" />
+            <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center">
+              <User className="h-10 w-10 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">{user?.name}</h2>
+              <h2 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                {user?.name}
+              </h2>
               <div className="flex items-center space-x-2 text-gray-600 mt-1">
                 <Mail className="h-4 w-4" />
                 <span>{user?.email}</span>
@@ -61,32 +65,34 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 pt-6 border-t border-gray-200">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <Award className="h-6 w-6 text-green-600" />
-              </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-center space-x-3">
+              <Mail className={`h-5 w-5 ${isDark ? 'text-white' : 'text-accent'}`} />
               <div>
-                <p className="text-sm text-gray-600">Completed Laws</p>
-                <p className="text-2xl font-bold text-gray-900">{completedCount}</p>
+                <p className={`text-sm font-body ${isDark ? 'text-white' : 'text-gray-600'}`}>Email</p>
+                <p className={`font-semibold font-body ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {user?.email}
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <BookOpen className="h-6 w-6 text-blue-600" />
-              </div>
+            <div className="flex items-center space-x-3">
+              <Award className={`h-5 w-5 ${isDark ? 'text-white' : 'text-accent'}`} />
               <div>
-                <p className="text-sm text-gray-600">Overall Progress</p>
-                <p className="text-2xl font-bold text-gray-900">{progressPercentage.toFixed(0)}%</p>
+                <p className={`text-sm font-body ${isDark ? 'text-white' : 'text-gray-600'}`}>Completed Laws</p>
+                <p className={`font-semibold font-body ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {completedCount} Laws
+                </p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Progress Details */}
-        <div className="card p-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Learning Progress</h3>
+        <div className="bg-surface rounded-lg shadow-sm p-8 transition-colors duration-300">
+          <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            Learning Progress
+          </h3>
           
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">

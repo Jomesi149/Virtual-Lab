@@ -1,27 +1,102 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* stylelint-disable at-rule-no-unknown */
+/* Allow Tailwind at-rules (@tailwind, @layer, etc.) to be processed by PostCSS/Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;600&display=swap');
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
+  :root {
+    /* Day Mode Colors */
+    --color-background: #F0F4F5;
+    --color-surface: #FFFFFF;
+    --color-text-primary: #0F1A20;
+    --color-text-secondary: #5A707C;
+    --color-accent: #008DAA;
+    --color-accent-subtle: #D4EBF3;
+  }
+
+  .dark {
+    /* Night Mode Colors */
+    --color-background: #0F1A20;
+    --color-surface: #1D2F38;
+    --color-text-primary: #F0F4F5;
+    --color-text-secondary: #A0B4C0;
+    --color-accent: #A4D4E8;
+    --color-accent-subtle: #1A5469;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900;
+    font-family: 'Work Sans', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  }
+
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Work Sans', sans-serif;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: filter 150ms ease;
   }
-  
+  .btn-primary:hover {
+    filter: brightness(0.9);
+  }
+
   .btn-secondary {
-    @apply bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors font-medium;
+    background-color: #E5E7EB;
+    color: #1F2937;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 150ms ease;
   }
-  
+  .btn-secondary:hover {
+    background-color: #D1D5DB;
+  }
+
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: box-shadow 150ms ease, border-color 150ms ease;
   }
-  
+  .input-field:focus {
+    box-shadow: 0 0 0 4px rgba(0,141,170,0.12);
+    border-color: transparent;
+  }
+
   .card {
-    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300;
+    background-color: var(--color-surface);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(2,6,23,0.08);
+    transition: box-shadow 300ms ease;
+  }
+  .card:hover {
+    box-shadow: 0 10px 20px rgba(2,6,23,0.12);
   }
 }
