@@ -3,6 +3,9 @@ import axios from 'axios'
 
 const AuthContext = createContext(null)
 
+// API Base URL - gunakan environment variable untuk production
+const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
@@ -29,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password })
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password })
       const { token, user } = response.data
       
       localStorage.setItem('token', token)
@@ -48,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post('/api/auth/register', { name, email, password })
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, { name, email, password })
       const { token, user } = response.data
       
       localStorage.setItem('token', token)
