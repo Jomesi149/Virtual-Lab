@@ -7,7 +7,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://virtual-lab-gray.vercel.app/',
+        target: 'https://virtual-lab-be.vercel.app/',
         changeOrigin: true
       }
     }
