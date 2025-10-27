@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { usersDB } from '../services/database.js';
+import User from '../models/User.js';
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
     // Check if user already exists
-    const existingUser = await usersDB.findByEmail(email);
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return res.status(400).json({ 
         success: false, 
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create new user
-    const user = await usersDB.create({
+    const user = await User.create({
       name,
       email: email.toLowerCase(),
       password: hashedPassword
@@ -32,19 +32,20 @@ router.post('/register', async (req, res) => {
 
     // Generate token
     const token = jwt.sign(
-      { userId: user.id }, 
+      { userId: user._id.toString() }, 
       process.env.JWT_SECRET, 
       { expiresIn: '7d' }
     );
 
     // Remove password from response
-    const { password: _, ...userWithoutPassword } = user;
+    const userObject = user.toJSON();
+    delete userObject.password;
 
     res.status(201).json({
       success: true,
       message: 'User registered successfully',
       token,
-      user: userWithoutPassword
+      user: userObject
     });
   } catch (error) {
     res.status(500).json({ 
@@ -61,7 +62,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     // Find user
-    const user = await usersDB.findByEmail(email);
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return res.status(401).json({ 
         success: false, 
@@ -80,19 +81,20 @@ router.post('/login', async (req, res) => {
 
     // Generate token
     const token = jwt.sign(
-      { userId: user.id }, 
+      { userId: user._id.toString() }, 
       process.env.JWT_SECRET, 
       { expiresIn: '7d' }
     );
 
     // Remove password from response
-    const { password: _, ...userWithoutPassword } = user;
+    const userObject = user.toJSON();
+    delete userObject.password;
 
     res.json({
       success: true,
       message: 'Login successful',
       token,
-      user: userWithoutPassword
+      user: userObject
     });
   } catch (error) {
     res.status(500).json({ 

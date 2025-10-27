@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import connectDB from './config/database.js';
 import authRoutes from './routes/auth.js';
 import uxLawsRoutes from './routes/uxLaws.js';
 import userRoutes from './routes/user.js';
@@ -9,6 +10,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(cors());
@@ -25,7 +29,7 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'UX Virtual Lab API is running',
-    storage: 'JSON File Storage'
+    database: 'MongoDB'
   });
 });
 
@@ -41,5 +45,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`💾 Using JSON file storage (no database installation needed)`);
+  console.log(`💾 Using MongoDB database`);
 });

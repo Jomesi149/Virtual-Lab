@@ -46,7 +46,9 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-background py-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-accent mb-8" style={{ fontSize: '56px', fontWeight: 700 }}>My Profile</h1>
+        <h1 className={`text-3xl font-bold mb-8 font-heading ${isDark ? 'text-text-primary' : 'text-gray-900'}`} style={{ fontSize: '56px', fontWeight: 700 }}>
+          Profil Saya
+        </h1>
 
         {/* Profile Info Card */}
         <div className="bg-surface rounded-lg shadow-sm p-8 mb-8 transition-colors duration-300">
@@ -79,9 +81,9 @@ export default function Profile() {
             <div className="flex items-center space-x-3">
               <Award className={`h-5 w-5 ${isDark ? 'text-white' : 'text-accent'}`} />
               <div>
-                <p className={`text-sm font-body ${isDark ? 'text-white' : 'text-gray-600'}`}>Completed Laws</p>
+                <p className={`text-sm font-body ${isDark ? 'text-white' : 'text-gray-600'}`}>Hukum Selesai</p>
                 <p className={`font-semibold font-body ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {completedCount} Laws
+                  {completedCount} Hukum
                 </p>
               </div>
             </div>
@@ -91,19 +93,21 @@ export default function Profile() {
         {/* Progress Details */}
         <div className="bg-surface rounded-lg shadow-sm p-8 transition-colors duration-300">
           <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Learning Progress
+            Progres Pembelajaran
           </h3>
           
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Overall Completion</span>
-              <span className="text-sm font-medium text-primary-600">
-                {completedCount} / {totalCount} laws
+              <span className="text-lg font-semibold text-accent">
+                {completedCount} / {totalCount}
+              </span>
+              <span className="text-sm text-text-secondary">
+                {progressPercentage.toFixed(0)}% Selesai
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-accent-subtle rounded-full h-3">
               <div
-                className="bg-primary-600 h-3 rounded-full transition-all duration-500"
+                className="bg-accent h-3 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -111,12 +115,12 @@ export default function Profile() {
 
           {completedCount > 0 ? (
             <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-3">Completed Laws:</h4>
+              <h4 className="text-sm font-medium text-text-secondary mb-3">Hukum yang Diselesaikan:</h4>
               <div className="space-y-2">
                 {profile.completedLaws.map((lawId) => {
                   const law = laws.find(l => l.id === lawId)
                   return law ? (
-                    <div key={lawId} className="flex items-center space-x-2 text-gray-600">
+                    <div key={lawId} className="flex items-center space-x-2 text-text-secondary">
                       <Award className="h-4 w-4 text-green-500" />
                       <span>{law.title}</span>
                     </div>
@@ -126,8 +130,8 @@ export default function Profile() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">No completed laws yet. Start learning!</p>
+              <BookOpen className="h-12 w-12 text-text-secondary mx-auto mb-3" />
+              <p className="text-text-secondary">Belum ada hukum yang diselesaikan. Mulai belajar sekarang!</p>
             </div>
           )}
         </div>
