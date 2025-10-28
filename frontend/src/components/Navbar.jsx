@@ -12,7 +12,7 @@ export default function Navbar() {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId)
     if (section) {
-      const offsetTop = section.offsetTop - 64 // 64px untuk navbar height
+      const offsetTop = section.offsetTop - 64 
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
@@ -24,7 +24,6 @@ export default function Navbar() {
     <nav className="bg-surface shadow-md sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex justify-between items-center h-16">
-          {/* Left - Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-accent" />
@@ -32,7 +31,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Center - Navigation Links */}
           {isHomePage && (
             <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex items-center space-x-6">
               <button
@@ -97,11 +95,9 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Right - Actions */}
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                {/* Theme Toggle */}
                 <button
                   onClick={toggleTheme}
                   className={`p-2 rounded-lg transition-all duration-200 ${
@@ -116,7 +112,6 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Profile Icon Only */}
                 <Link
                   to="/profile"
                   className={`p-2 rounded-lg transition-all duration-200 ${
@@ -127,7 +122,6 @@ export default function Navbar() {
                   <User className={`h-5 w-5 ${isDark ? 'text-accent' : 'text-gray-900'}`} />
                 </Link>
 
-                {/* Logout */}
                 <button
                   onClick={logout}
                   className={`p-2 rounded-lg transition-all duration-200 ${

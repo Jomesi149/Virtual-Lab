@@ -26,7 +26,6 @@ export default function Profile() {
       setLaws(lawsRes.data.data)
       setLoading(false)
     } catch (error) {
-      console.error('Error fetching profile:', error)
       setLoading(false)
     }
   }
@@ -50,7 +49,6 @@ export default function Profile() {
           Profil Saya
         </h1>
 
-        {/* Profile Info Card */}
         <div className="bg-surface rounded-lg shadow-sm p-8 mb-8 transition-colors duration-300">
           <div className="flex items-center space-x-6 mb-6">
             <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center">
@@ -90,7 +88,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Progress Details */}
         <div className="bg-surface rounded-lg shadow-sm p-8 transition-colors duration-300">
           <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Progres Pembelajaran

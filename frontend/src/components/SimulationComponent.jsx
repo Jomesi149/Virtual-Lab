@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
-// Simulasi komponen untuk berbagai UX Laws
 const SimulationComponent = ({ lawId }) => {
   const { isDark } = useTheme()
   

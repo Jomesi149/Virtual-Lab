@@ -18,39 +18,28 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      console.log('Fetching dashboard data...')
       const [lawsRes, profileRes] = await Promise.all([
         axiosInstance.get('/api/ux-laws'),
         axiosInstance.get('/api/user/profile')
       ])
       
-      console.log('Profile data:', profileRes.data.data)
-      console.log('Progress data:', profileRes.data.data.progress)
-      
-      // Apply Indonesian translations
       const translatedLaws = lawsRes.data.data.map(law => 
         getIndonesianLaw(law.id, law)
       )
       
       setLaws(translatedLaws)
       
-      // Handle progress - ensure it's an object
       let progressObj = profileRes.data.data.progress || {}
       
-      // If progress is a Map, convert to object
       if (progressObj instanceof Map) {
         progressObj = Object.fromEntries(progressObj)
-      }
-      // If progress is already an object, use as is
-      else if (typeof progressObj === 'object' && !Array.isArray(progressObj)) {
+      } else if (typeof progressObj === 'object' && !Array.isArray(progressObj)) {
         progressObj = { ...progressObj }
       }
       
-      console.log('Progress object:', progressObj)
       setUserProgress(progressObj)
       setLoading(false)
     } catch (error) {
-      console.error('Error fetching data:', error)
       setLoading(false)
     }
   }
@@ -80,7 +69,6 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background py-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="mb-8">
           <h1 className={`text-3xl font-bold mb-2 font-heading ${isDark ? 'text-text-primary' : 'text-gray-900'}`} style={{ fontSize: '56px', fontWeight: 700 }}>
             Dashboard UX Laws
@@ -90,7 +78,6 @@ export default function Dashboard() {
           </p>
         </div>
 
-        {/* Progress Card */}
         <div className="bg-surface rounded-lg shadow-sm p-6 mb-8 transition-colors duration-300">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-heading font-semibold text-text-primary" style={{ fontSize: '36px', fontWeight: 500 }}>
@@ -111,7 +98,6 @@ export default function Dashboard() {
           </p>
         </div>
 
-        {/* Laws Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {laws.map((law) => (
             <Link

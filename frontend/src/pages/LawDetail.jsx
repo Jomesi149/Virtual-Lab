@@ -13,8 +13,6 @@ export default function LawDetail() {
   const [isCompleted, setIsCompleted] = useState(false)
   const [loading, setLoading] = useState(true)
   const { isDark } = useTheme()
-  
-  // Simulation state
   const [showSimulation, setShowSimulation] = useState(false)
 
   useEffect(() => {
@@ -28,14 +26,12 @@ export default function LawDetail() {
         axiosInstance.get('/api/user/profile')
       ])
       
-      // Apply Indonesian translation
       const lawData = getIndonesianLaw(lawId, lawRes.data.data)
       setLaw(lawData)
       const progress = Object.fromEntries(profileRes.data.data.progress || new Map())
       setIsCompleted(progress[lawId] || false)
       setLoading(false)
     } catch (error) {
-      console.error('Error fetching law:', error)
       setLoading(false)
     }
   }
@@ -46,16 +42,12 @@ export default function LawDetail() {
 
   const handleSimulationComplete = async () => {
     try {
-      console.log('Marking law as complete:', lawId)
-      const response = await axiosInstance.put(`/api/user/progress/${lawId}`, {
+      await axiosInstance.put(`/api/user/progress/${lawId}`, {
         completed: true
       })
-      console.log('Progress update response:', response.data)
       setIsCompleted(true)
       setShowSimulation(false)
     } catch (error) {
-      console.error('Error updating progress:', error)
-      console.error('Error details:', error.response?.data)
     }
   }
 
@@ -90,7 +82,6 @@ export default function LawDetail() {
   return (
     <div className="min-h-screen bg-background py-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Back Button */}
         <button
           onClick={() => navigate('/dashboard')}
           className={`flex items-center space-x-2 mb-6 transition-colors ${
@@ -101,9 +92,7 @@ export default function LawDetail() {
           <span>Kembali ke Dashboard</span>
         </button>
 
-        {/* Main Content Card */}
         <div className="bg-surface rounded-lg shadow-sm p-8 mb-6 transition-colors duration-300">
-          {/* Header */}
           <div className="flex items-start justify-between mb-6">
             <div className="flex-1">
               <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-3 ${
@@ -119,7 +108,6 @@ export default function LawDetail() {
               </p>
             </div>
             
-            {/* Completion Status Circle */}
             <div className="ml-4 flex-shrink-0">
               {isCompleted ? (
                 <div className="relative">
@@ -139,7 +127,6 @@ export default function LawDetail() {
             </div>
           </div>
 
-          {/* Simulation Section */}
           {!showSimulation && !isCompleted && (
             <div className={`p-6 rounded-lg border-2 ${isDark ? 'border-accent bg-accent/10' : 'border-accent bg-accent/5'}`}>
               <div className="flex items-start space-x-4">
@@ -186,7 +173,6 @@ export default function LawDetail() {
             </div>
           )}
 
-          {/* Simulation Interface */}
           {showSimulation && (
             <div className={`p-6 rounded-lg border-2 ${isDark ? 'border-accent bg-background' : 'border-accent bg-white'}`}>
               <div className="mb-6">
@@ -217,10 +203,8 @@ export default function LawDetail() {
             </div>
           )}
 
-          {/* Full Content - Only show when simulation is not active */}
           {!showSimulation && (
             <>
-              {/* Full Content */}
               <div className={`mt-8 pt-8 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
                 <h2 className={`text-2xl font-semibold mb-4 ${isDark ? 'text-text-primary' : 'text-gray-900'}`}>
                   Gambaran Umum
@@ -230,7 +214,6 @@ export default function LawDetail() {
                 </p>
               </div>
 
-              {/* Principles */}
               {law.principles && law.principles.length > 0 && (
                 <div className={`mt-8 pt-8 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
                   <div className="flex items-center space-x-2 mb-4">
@@ -256,7 +239,6 @@ export default function LawDetail() {
             </div>
           )}
 
-          {/* Examples */}
           {law.examples && law.examples.length > 0 && (
             <div className={`mt-8 pt-8 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
               <div className="flex items-center space-x-2 mb-4">
