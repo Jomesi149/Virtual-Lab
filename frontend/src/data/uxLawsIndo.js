@@ -1,6 +1,6 @@
 export const uxLawsIndo = {
   'aesthetic-usability-effect': {
-    title: "Efek Aesthetic-Usability",
+    title: "Aesthetic-Usability Effect",
     description: "Pengguna sering menganggap desain yang indah sebagai desain yang lebih mudah digunakan.",
     fullContent: "Efek Aesthetic-Usability menggambarkan fenomena di mana pengguna menganggap desain yang lebih estetis lebih mudah digunakan daripada desain yang kurang estetis. Desain yang indah menciptakan respons positif di otak manusia dan membuat mereka percaya bahwa desain tersebut benar-benar bekerja lebih baik.",
     principles: [
@@ -43,7 +43,7 @@ export const uxLawsIndo = {
   },
 
   'fitts-law': {
-    title: "Hukum Fitts",
+    title: "Fitts's Law",
     description: "Waktu untuk mencapai target adalah fungsi dari jarak dan ukuran target.",
     fullContent: "Hukum Fitts menyatakan bahwa jumlah waktu yang diperlukan seseorang untuk menggerakkan pointer ke area target adalah fungsi dari jarak ke target dibagi dengan ukuran target. Jadi, semakin jauh jarak dan semakin kecil ukuran target, semakin lama waktu yang dibutuhkan.",
     principles: [
@@ -65,7 +65,7 @@ export const uxLawsIndo = {
   },
 
   'goal-gradient-effect': {
-    title: "Efek Goal-Gradient",
+    title: "Goal-Gradient Effect",
     description: "Kecenderungan untuk mendekati tujuan meningkat seiring kedekatan pada tujuan.",
     fullContent: "Efek Goal-Gradient menunjukkan bahwa orang lebih termotivasi untuk menyelesaikan tugas saat mereka semakin dekat dengan menyelesaikannya. Efek ini dapat dimanfaatkan dalam desain UX melalui indikator progress, gamifikasi, dan kemajuan artificial.",
     principles: [
@@ -87,7 +87,7 @@ export const uxLawsIndo = {
   },
 
   'hicks-law': {
-    title: "Hukum Hick",
+    title: "Hick's Law",
     description: "Waktu yang dibutuhkan untuk membuat keputusan meningkat dengan jumlah dan kompleksitas pilihan.",
     fullContent: "Hukum Hick (atau Hukum Hick-Hyman) menggambarkan waktu yang dibutuhkan seseorang untuk membuat keputusan sebagai hasil dari pilihan yang mungkin mereka miliki. Menambah jumlah pilihan akan meningkatkan waktu keputusan secara logaritmik.",
     principles: [
@@ -110,7 +110,7 @@ export const uxLawsIndo = {
   },
 
   'jakobs-law': {
-    title: "Hukum Jakob",
+    title: "Jakob's Law",
     description: "Pengguna menghabiskan sebagian besar waktu mereka di situs lain. Ini berarti pengguna lebih suka situs Anda bekerja dengan cara yang sama seperti semua situs lain yang sudah mereka kenal.",
     fullContent: "Hukum Jakob menyatakan bahwa pengguna menghabiskan sebagian besar waktu mereka di situs lain, dan mereka lebih suka situs Anda bekerja dengan cara yang sama seperti semua situs lain yang sudah mereka kenal. Dengan memanfaatkan model mental yang ada, kita dapat menciptakan pengalaman pengguna yang superior di mana pengguna dapat fokus pada tugas mereka daripada mempelajari model baru.",
     principles: [
@@ -132,7 +132,7 @@ export const uxLawsIndo = {
   },
 
   'law-of-common-region': {
-    title: "Hukum Common Region",
+    title: "Law of Common Region",
     description: "Elemen cenderung dipersepsikan sebagai kelompok jika mereka berbagi area dengan batas yang jelas.",
     fullContent: "Hukum Common Region menyatakan bahwa elemen dipersepsikan sebagai bagian dari grup jika mereka terletak dalam region tertutup yang sama. Menambahkan border di sekitar elemen atau grup elemen adalah cara mudah untuk membuat region yang umum dan menunjukkan bahwa elemen tersebut terkait.",
     principles: [
@@ -154,7 +154,7 @@ export const uxLawsIndo = {
   },
 
   'law-of-proximity': {
-    title: "Hukum Proximity",
+    title: "Law of Proximity",
     description: "Objek yang dekat, atau berdekatan satu sama lain, cenderung dikelompokkan bersama.",
     fullContent: "Hukum Proximity menyatakan bahwa objek yang lebih dekat satu sama lain dipersepsikan lebih terkait daripada objek yang lebih jauh. Proximity membantu membangun hubungan dengan objek terdekat dan merupakan salah satu cara paling kuat untuk menunjukkan pengelompokan dalam desain visual.",
     principles: [
@@ -176,7 +176,7 @@ export const uxLawsIndo = {
   },
 
   'law-of-pragnanz': {
-    title: "Hukum Prägnanz",
+    title: "Law of Prägnanz",
     description: "Orang akan mempersepsikan dan menginterpretasikan gambar yang ambigu atau kompleks dalam bentuk yang paling sederhana.",
     fullContent: "Hukum Prägnanz (juga dikenal sebagai hukum kesederhanaan atau hukum bentuk yang baik) menyatakan bahwa orang akan mempersepsikan dan menginterpretasikan gambar yang ambigu atau kompleks dalam bentuk yang paling sederhana. Mata manusia suka menemukan kesederhanaan dan keteraturan dalam bentuk kompleks karena mencegah kita dari kewalahan dengan informasi.",
     principles: [
@@ -198,7 +198,7 @@ export const uxLawsIndo = {
   },
 
   'law-of-similarity': {
-    title: "Hukum Similarity",
+    title: "Law of Similarity",
     description: "Mata manusia cenderung mempersepsikan elemen serupa dalam desain sebagai gambar, bentuk, atau grup yang lengkap.",
     fullContent: "Hukum Similarity menyatakan bahwa elemen yang berbagi karakteristik visual serupa dipersepsikan lebih terkait daripada elemen yang tidak berbagi karakteristik tersebut. Similarity dapat dicapai melalui warna, bentuk, ukuran, tekstur, atau properti visual lainnya.",
     principles: [
@@ -220,7 +220,7 @@ export const uxLawsIndo = {
   },
 
   'law-of-uniform-connectedness': {
-    title: "Hukum Uniform Connectedness",
+    title: "Law of Uniform Connectedness",
     description: "Elemen yang terhubung secara visual dipersepsikan lebih terkait daripada elemen tanpa koneksi.",
     fullContent: "Hukum Uniform Connectedness menyatakan bahwa elemen yang terhubung secara visual dipersepsikan lebih terkait daripada elemen tanpa koneksi. Ini dapat dicapai melalui garis, kotak, warna, atau elemen visual lain yang menciptakan koneksi antar item.",
     principles: [
@@ -242,7 +242,7 @@ export const uxLawsIndo = {
   },
 
   'millers-law': {
-    title: "Hukum Miller",
+    title: "Miller's Law",
     description: "Rata-rata orang hanya dapat menyimpan 7 (plus atau minus 2) item dalam memori kerja mereka.",
     fullContent: "Hukum Miller menyatakan bahwa jumlah objek yang dapat disimpan manusia rata-rata dalam memori kerja adalah sekitar 7. Ini telah dikenal sebagai 'angka ajaib tujuh, plus atau minus dua.' Hukum ini pertama kali diusulkan oleh psikolog kognitif George A. Miller.",
     principles: [
@@ -264,7 +264,7 @@ export const uxLawsIndo = {
   },
 
   'occams-razor': {
-    title: "Pisau Cukur Occam",
+    title: "Occam's Razor",
     description: "Di antara hipotesis yang bersaing yang memprediksi dengan sama baiknya, yang dengan asumsi paling sedikit harus dipilih.",
     fullContent: "Pisau Cukur Occam menyatakan bahwa solusi paling sederhana biasanya yang terbaik. Dalam desain UX, ini berarti kita harus menganalisis setiap elemen dan menghapus sebanyak mungkin tanpa mengorbankan fungsi keseluruhan. Kesederhanaan harus menjadi tujuan utama dalam desain.",
     principles: [
@@ -286,7 +286,7 @@ export const uxLawsIndo = {
   },
 
   'parkinsons-law': {
-    title: "Hukum Parkinson",
+    title: "Parkinson's Law",
     description: "Setiap tugas akan mengembang hingga semua waktu yang tersedia habis terpakai.",
     fullContent: "Hukum Parkinson menyatakan bahwa pekerjaan mengembang untuk mengisi waktu yang tersedia untuk penyelesaiannya. Dalam desain UX, ini berarti pengguna akan mengambil waktu sebanyak yang kita berikan untuk menyelesaikan tugas. Dengan menetapkan batasan, kita dapat membantu pengguna bekerja lebih efisien.",
     principles: [
@@ -308,7 +308,7 @@ export const uxLawsIndo = {
   },
 
   'peak-end-rule': {
-    title: "Aturan Peak-End",
+    title: "Peak-End Rule",
     description: "Orang menilai pengalaman sebagian besar berdasarkan bagaimana perasaan mereka pada puncaknya dan pada akhirnya, daripada total jumlah atau rata-rata dari setiap momen.",
     fullContent: "Aturan Peak-End menunjukkan bahwa orang mengingat pengalaman berdasarkan bagaimana perasaan mereka pada puncaknya (titik paling intens) dan pada akhirnya, daripada rata-rata dari setiap momen. Ini memiliki implikasi signifikan untuk desain UX - kita harus fokus membuat momen yang paling berkesan menjadi positif.",
     principles: [
@@ -330,7 +330,7 @@ export const uxLawsIndo = {
   },
 
   'postel-law': {
-    title: "Hukum Postel",
+    title: "Postel's Law",
     description: "Bersikap liberal dalam apa yang Anda terima, dan konservatif dalam apa yang Anda kirim.",
     fullContent: "Hukum Postel (juga dikenal sebagai Prinsip Ketahanan) menyatakan bahwa kita harus liberal dalam apa yang kita terima dari pengguna, tetapi konservatif dalam apa yang kita kirim kembali. Dalam desain UX, ini berarti menerima berbagai macam input dan perilaku pengguna, sambil memberikan output yang jelas dan konsisten.",
     principles: [
@@ -352,7 +352,7 @@ export const uxLawsIndo = {
   },
 
   'serial-position-effect': {
-    title: "Efek Posisi Serial",
+    title: "Serial Position Effect",
     description: "Pengguna memiliki kecenderungan untuk paling mengingat item pertama dan terakhir dalam seri.",
     fullContent: "Efek Posisi Serial menunjukkan bahwa orang cenderung mengingat item pertama dan terakhir dalam seri dengan baik, dan item tengah paling buruk. Ini adalah kombinasi dari efek primacy (mengingat lebih baik item di awal) dan efek recency (mengingat lebih baik item di akhir).",
     principles: [
@@ -374,7 +374,7 @@ export const uxLawsIndo = {
   },
 
   'teslers-law': {
-    title: "Hukum Tesler",
+    title: "Tesler's Law",
     description: "Untuk setiap sistem ada sejumlah kompleksitas tertentu yang tidak dapat dikurangi.",
     fullContent: "Hukum Tesler (juga dikenal sebagai Hukum Konservasi Kompleksitas) menyatakan bahwa untuk setiap sistem, ada sejumlah kompleksitas tertentu yang tidak dapat dikurangi. Kompleksitas ini dapat dipindahkan, tetapi tidak dapat dihilangkan. Pertanyaannya menjadi: siapa yang harus menangani kompleksitas ini - pengguna atau desainer?",
     principles: [
@@ -396,7 +396,7 @@ export const uxLawsIndo = {
   },
 
   'von-restorff-effect': {
-    title: "Efek Von Restorff",
+    title: "Von Restorff Effect",
     description: "Ketika beberapa objek serupa hadir, yang berbeda dari yang lain paling mungkin diingat.",
     fullContent: "Efek Von Restorff (juga dikenal sebagai Efek Isolasi) memprediksi bahwa ketika beberapa objek serupa hadir, yang berbeda dari yang lain paling mungkin diingat. Efek ini pertama kali dipelajari oleh psikiater Jerman Hedwig von Restorff pada tahun 1933.",
     principles: [
@@ -418,7 +418,7 @@ export const uxLawsIndo = {
   },
 
   'zeigarnik-effect': {
-    title: "Efek Zeigarnik",
+    title: "Zeigarnik Effect",
     description: "Orang mengingat tugas yang belum selesai atau terganggu lebih baik daripada tugas yang sudah selesai.",
     fullContent: "Efek Zeigarnik menunjukkan bahwa orang mengingat tugas yang belum selesai atau terganggu lebih baik daripada yang sudah selesai. Ini menciptakan rasa ketegangan yang tetap bersama kita sampai tugas selesai. Efek ini pertama kali dipelajari oleh psikolog Rusia Bluma Zeigarnik pada tahun 1920-an.",
     principles: [
