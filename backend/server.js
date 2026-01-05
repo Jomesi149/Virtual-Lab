@@ -13,23 +13,27 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:8081',
-  'http://localhost:8082',
-  'http://localhost:19006',
-  'http://localhost:19000',
-  'https://zomox.vercel.app',
-  'https://virtual-lab-gray.vercel.app'
-];
-
 const corsOptions = {
   origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.FRONTEND_URL === origin) {
+    // Allow all localhost origins for development
+    if (origin.startsWith('http://localhost:')) {
+      return callback(null, true);
+    }
+    
+    // Allow specific production origins
+    const allowedOrigins = [
+      'https://zomox.vercel.app',
+      'https://virtual-lab-gray.vercel.app',
+      process.env.FRONTEND_URL
+    ].filter(Boolean);
+    
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
