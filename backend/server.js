@@ -23,6 +23,11 @@ const corsOptions = {
       return callback(null, true);
     }
     
+    // Allow all Vercel preview/production deployments
+    if (origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    
     // Allow specific production origins
     const allowedOrigins = [
       'https://zomox.vercel.app',
